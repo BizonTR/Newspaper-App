@@ -1,26 +1,47 @@
 <head>
-  <title>news</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haber Sitesi</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> info}}
+  {{> searchForm}}
+  {{> newsCategories}}
+  {{> newsList}}
+  {{> newsPagination}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="searchForm">
+  <form id="searchForm">
+    <input type="text" name="city" placeholder="Şehir Giriniz">
+    <button type="submit">Ara</button>
+  </form>
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name="newsCategories">
+  <div>
+    <button data-tag="general">Genel</button>
+    <button data-tag="technology">Teknoloji</button>
+    <button data-tag="economy">Ekonomi</button>
+  </div>
+</template>
+
+<template name="newsList">
+  {{#if error}}
+    <p>{{error}}</p>
+  {{else}}
+    <ul>
+      {{#each news}}
+        <li>{{description}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+</template>
+
+<template name="newsPagination">
+  <div>
+    <button class="prev">Önceki</button>
+    {{#each pages}}
+      <button class="page-button {{isActive this}}" data-page="{{this}}">{{this}}</button>
+    {{/each}}
+    <button class="next">Sonraki</button>
+  </div>
 </template>
