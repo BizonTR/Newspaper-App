@@ -101,6 +101,15 @@ Template.newsPagination.events({
   }
 });
 
+Template.newsCard.events({
+  'click .card': function(event) {
+    const url = this.url;
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
+});
+
 Template.newsPagination.helpers({
   pages: function() {
     return pageRange.get();

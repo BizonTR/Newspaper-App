@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.23.5",
+    "bootstrap": "^5.3.3",
     "jquery": "^3.7.1",
-    "meteor-node-stubs": "^1.2.7"
+    "meteor-node-stubs": "^1.2.7",
+    "popper.js": "^1.16.1"
   },
   "meteor": {
     "mainModule": {
