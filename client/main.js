@@ -2,6 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
+import './components/newsCard.js'; // import the new newsCard component
+import './components/navbar.js'; // import the new navbar component
+
 
 const newsData = new ReactiveVar([]);
 const errorData = new ReactiveVar(null);
@@ -35,7 +38,7 @@ const updatePageRange = (currentPage) => {
 };
 
 Meteor.startup(() => {
-  Meteor.call('news.fetchGeneral', 'general', 0, handleFetchResult);
+  //Meteor.call('news.fetchGeneral', 'general', 0, handleFetchResult);
   updatePageRange(0);
 });
 

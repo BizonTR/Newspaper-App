@@ -52,6 +52,6 @@ export const fetchGeneralNews = (tag = 'general', page = 0) => {
 
 export const fetchNewsByCity = (city) => {
   const path = `/news/getNewsLocal?city=${encodeURIComponent(city)}`;
-  console.log(`Fetching news for city: ${city} with path: ${path}`); // Debugging log
+  console.log(`Fetching news for city: ${city} with path: ${path}`);
   return fetchNews(path);
 };
