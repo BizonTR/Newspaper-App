@@ -1,0 +1,23 @@
+.navbar-custom {
+    background-color: #2a3884;
+    position: relative;
+    z-index: 1000;
+  }
+  
+  .navbar-custom .navbar-brand,
+  .navbar-custom .nav-link {
+    color: #ffffff; /* Beyaz renk */
+  }
+  
+  .navbar-custom .nav-link:hover {
+    color: #d3d3d3; /* Açık gri renk */
+  }
+
+  .navbar-toggler {
+    z-index: 1100;
+  }
+
+  .nav-link{
+    margin-inline: 10px;
+  }
+  

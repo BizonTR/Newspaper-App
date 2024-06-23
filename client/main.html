@@ -1,64 +1,65 @@
 <head>
   <title>Haber Sitesi</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/navbar.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-  <div class="container">
+  {{> navbar}}
+  <div class="container mt-4">
     {{> searchForm}}
     {{> newsCategories}}
-    <div class="row" id="news-container">
-      {{> newsList}}
-    </div>
+    {{> newsList}}
     {{> newsPagination}}
   </div>
 </body>
 
 <template name="searchForm">
-  <div style="margin-block: 10;">
-  <form id="searchForm">
-    <input type="text" name="city" placeholder="Şehir Giriniz">
-    <button type="submit">Ara</button>
+  <form id="searchForm" class="form-inline my-4">
+    <input type="text" name="city" class="form-control mr-2" placeholder="Şehir Giriniz">
+    <button type="submit" class="btn btn-primary">Ara</button>
   </form>
-</div>
 </template>
 
 <template name="newsCategories">
-  <div>
-    <button class="btn btn-primary" data-tag="general">Genel</button>
-    <button class="btn btn-primary" data-tag="technology">Teknoloji</button>
-    <button class="btn btn-primary" data-tag="economy">Ekonomi</button>
+  <div class="btn-group my-4">
+    <button class="btn btn-secondary" data-tag="general">Genel</button>
+    <button class="btn btn-secondary" data-tag="technology">Teknoloji</button>
+    <button class="btn btn-secondary" data-tag="economy">Ekonomi</button>
   </div>
 </template>
 
 <template name="newsList">
   {{#if error}}
-    <p>{{error}}</p>
+    <div class="alert alert-danger" role="alert">
+      {{error}}
+    </div>
   {{else}}
-    {{#each news}}
-      {{> newsCard}}
-    {{/each}}
+    <div class="row">
+      {{#each news}}
+        {{> newsCard}}
+      {{/each}}
+    </div>
   {{/if}}
 </template>
 
-<template name="newsCard">
-  <div class="col-md-4 mb-4">
-    <div class="card" style="width: 18rem; cursor: pointer;" data-url="{{url}}">
-      <img class="card-img-top" src="{{image}}" alt="Card image cap">
-      <div class="card-body">
-        <p class="card-text">{{description}}</p>
-      </div>
-    </div>
-  </div>
-</template>
-
-
 <template name="newsPagination">
-  <div>
-    <button class="btn btn-secondary prev">Önceki</button>
-    {{#each pages}}
-      <button class="btn btn-secondary page-button {{isActive this}}" data-page="{{this}}">{{this}}</button>
-    {{/each}}
-    <button class="btn btn-secondary next">Sonraki</button>
-  </div>
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <li class="page-item">
+        <button class="page-link prev">Önceki</button>
+      </li>
+      {{#each pages}}
+        <li class="page-item {{isActive this}}">
+          <button class="page-link page-button" data-page="{{this}}">{{this}}</button>
+        </li>
+      {{/each}}
+      <li class="page-item">
+        <button class="page-link next">Sonraki</button>
+      </li>
+    </ul>
+  </nav>
 </template>
