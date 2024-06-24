@@ -10,39 +10,26 @@
 <body>
   {{> navbar}}
   <div class="container mt-4">
-    {{> searchForm}}
-    {{> newsCategories}}
     {{> newsList}}
-    {{> newsPagination}}
+  </div>
+  <div class="container-fluid" style="justify-content: center; display: flex; background-color: #2a3884;">
+    <div style="margin-top: 20px;">
+      {{> newsPagination}}
+    </div>
   </div>
 </body>
 
-<template name="searchForm">
-  <form id="searchForm" class="form-inline my-4">
-    <input type="text" name="city" class="form-control mr-2" placeholder="Şehir Giriniz">
-    <button type="submit" class="btn btn-primary">Ara</button>
-  </form>
-</template>
-
-<template name="newsCategories">
-  <div class="btn-group my-4">
-    <button class="btn btn-secondary" data-tag="general">Genel</button>
-    <button class="btn btn-secondary" data-tag="technology">Teknoloji</button>
-    <button class="btn btn-secondary" data-tag="economy">Ekonomi</button>
-  </div>
-</template>
-
 <template name="newsList">
   {{#if error}}
-    <div class="alert alert-danger" role="alert">
-      {{error}}
-    </div>
+  <div class="alert alert-danger" role="alert">
+    {{error}}
+  </div>
   {{else}}
-    <div class="row">
-      {{#each news}}
-        {{> newsCard}}
-      {{/each}}
-    </div>
+  <div class="row">
+    {{#each news}}
+    {{> newsCard}}
+    {{/each}}
+  </div>
   {{/if}}
 </template>
 
@@ -53,9 +40,9 @@
         <button class="page-link prev">Önceki</button>
       </li>
       {{#each pages}}
-        <li class="page-item {{isActive this}}">
-          <button class="page-link page-button" data-page="{{this}}">{{this}}</button>
-        </li>
+      <li class="page-item {{isActive this}}">
+        <button class="page-link page-button" data-page="{{this}}">{{this}}</button>
+      </li>
       {{/each}}
       <li class="page-item">
         <button class="page-link next">Sonraki</button>

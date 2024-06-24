@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
+import './components/navbar.html'
 import './components/newsCard.js'; // import the new newsCard component
 import './components/navbar.js'; // import the new navbar component
 
@@ -38,21 +39,19 @@ const updatePageRange = (currentPage) => {
 };
 
 Meteor.startup(() => {
-  //Meteor.call('news.fetchGeneral', 'general', 0, handleFetchResult);
+  Meteor.call('news.fetchGeneral', 'general', 0, handleFetchResult);
   updatePageRange(0);
 });
 
-Template.newsCategories.events({
-  'click button': function(event) {
+Template.navbar.events({
+  'click .nav-link': function(event) {
+    event.preventDefault();
     const tag = event.target.dataset.tag;
     currentTag.set(tag);
     currentPage.set(0);
     Meteor.call('news.fetchGeneral', tag, 0, handleFetchResult);
     updatePageRange(0);
-  }
-});
-
-Template.searchForm.events({
+  },
   'submit #searchForm': function(event) {
     event.preventDefault();
     const city = event.target.city.value.trim();
