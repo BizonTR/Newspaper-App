@@ -25,10 +25,14 @@
     {{error}}
   </div>
   {{else}}
-  <div class="row">
-    {{#each news}}
-    {{> newsCard}}
-    {{/each}}
+  <div class="container mt-4">
+    <div class="row">
+      {{#each news}}
+      <div class="col-md-4 mb-4 col-sm-6 col-xs-12">
+        {{> newsCard}}
+      </div>
+      {{/each}}
+    </div>
   </div>
   {{/if}}
 </template>
