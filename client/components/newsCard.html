@@ -1,11 +1,16 @@
 <template name="newsCard">
-    <div class="col-xs-12 mb-4">
-        <div class="card" style="width: 100%; cursor: pointer;" data-url="{{url}}">
-            <img class="card-img-top" src="{{image}}" alt="Card image cap">
-            <p>{{source}}</p>
-            <div class="card-body">
-                <p class="card-text">{{name}}</p>
-            </div>
+    <div class="card">
+        <div class="image">
+            <img class="card-img-top" src="{{image}}" alt="Image">
+        </div>
+        <div class="content">
+                <span class="title">
+                    {{name}}
+                </span>
+
+            <!-- <p class="desc">
+                {{description}}
+            </p> -->
         </div>
     </div>
 </template>
