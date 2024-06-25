@@ -2,12 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import { fetchGeneralNews, fetchNewsByCity } from '/imports/api/newsApi.js';
 
 Meteor.methods({
-  'news.fetchGeneral': async function(tag, page = 0) {
+  'news.fetchGeneral': async function(country, tag, page = 0) {
     try {
-      const news = await fetchGeneralNews(tag, page);
+      const news = await fetchGeneralNews(country, tag, page);
       return news;
     } catch (error) {
-      throw new Meteor.Error('fetch-failed', `Failed to fetch ${tag} news`);
+      throw new Meteor.Error('fetch-failed', `Failed to fetch ${tag} ${country} news`);
     }
   },
   'news.fetchByCity': async function(city) {

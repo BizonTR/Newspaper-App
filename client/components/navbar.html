@@ -1,27 +1,41 @@
 <template name="navbar">
-    <nav class="navbar navbar-expand-xl navbar-dark navbar-custom">
-      <a class="navbar-brand" href="/">LOREM IPSUM</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-tag="general">Genel Haberler</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-tag="technology">Teknoloji</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-tag="economy">Ekonomi</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" id="searchForm">
-          <input class="form-control mr-sm-2" type="search" name="city" placeholder="Şehir Giriniz">
-          <button class="btn btn-light my-2 my-sm-0" type="submit">Ara</button>
-        </form>
+  <nav class="navbar navbar-expand-xl navbar-dark navbar-custom">
+    <a class="navbar-brand" href="/">LOREM IPSUM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-tag="general">Genel Haberler</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-tag="technology">Teknoloji</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-tag="economy">Ekonomi</a>
+        </li>
+      </ul>
+
+      <div style="margin-inline-end: 75px;">
+        <div class="dropdown">
+          <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Countries
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="tr" country-tag="tr">TR</a>
+            <a class="dropdown-item" href="en" country-tag="en">EN</a>
+            <a class="dropdown-item" href="de" country-tag="de">DE</a>
+          </div>
+        </div>
       </div>
-    </nav>
-  </template>
-  
+
+      <form class="form-inline my-2 my-lg-0" id="searchForm">
+        <input class="form-control mr-sm-2" type="search" name="city" placeholder="Şehir Giriniz">
+        <button class="btn btn-light my-2 my-sm-0" type="submit">Ara</button>
+      </form>
+    </div>
+  </nav>
+</template>

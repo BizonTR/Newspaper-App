@@ -45,8 +45,8 @@ const fetchNews = (path) => {
   });
 };
 
-export const fetchGeneralNews = (tag = 'general', page = 0) => {
-  const path = `/news/getNews?country=tr&tag=${encodeURIComponent(tag)}&paging=${page}`;
+export const fetchGeneralNews = (country= 'tr', tag = 'general', page = 0) => {
+  const path = `/news/getNews?country=${encodeURIComponent(country)}&tag=${encodeURIComponent(tag)}&paging=${page}`;
   return fetchNews(path);
 };
 

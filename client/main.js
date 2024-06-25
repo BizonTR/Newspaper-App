@@ -38,21 +38,36 @@ const updatePageRange = (currentPage) => {
   pageRange.set(range);
 };
 
+function getCountryFromUrl() {
+  const pathArray = window.location.pathname.split('/');
+  return pathArray[1]; // İlk parça ülke kodunu içeriyor, örneğin '/de' için 'de' döndürecektir
+}
+
 Meteor.startup(() => {
-  Meteor.call('news.fetchGeneral', 'general', 0, handleFetchResult);
-  updatePageRange(0);
+  const country = getCountryFromUrl(); // URL'den ülke kodunu almak için bir fonksiyon kullanıyoruz, bu fonksiyonu tanımlayacağız
+  console.log(country);
+  if (country === "" || country === null) {
+    Meteor.call('news.fetchGeneral', "tr", 'general', 0, handleFetchResult); // Meteor metodunu çağırırken ülke kodunu parametre olarak verdik
+    updatePageRange(0);
+  } else {
+    Meteor.call('news.fetchGeneral', country, 'general', 0, handleFetchResult); // Meteor metodunu çağırırken ülke kodunu parametre olarak verdik
+    updatePageRange(0);
+  }
 });
 
 Template.navbar.events({
-  'click .nav-link': function(event) {
+  'click .nav-link': function (event) {
     event.preventDefault();
     const tag = event.target.dataset.tag;
     currentTag.set(tag);
     currentPage.set(0);
-    Meteor.call('news.fetchGeneral', tag, 0, handleFetchResult);
+    if (getCountryFromUrl() === "" || getCountryFromUrl === null) {
+      Meteor.call('news.fetchGeneral', "tr", tag, page, handleFetchResult);
+    }
+    Meteor.call('news.fetchGeneral', getCountryFromUrl(), tag, handleFetchResult);
     updatePageRange(0);
   },
-  'submit #searchForm': function(event) {
+  'submit #searchForm': function (event) {
     event.preventDefault();
     const city = event.target.city.value.trim();
     if (city) {
@@ -65,46 +80,58 @@ Template.navbar.events({
 });
 
 Template.newsList.helpers({
-  news: function() {
+  news: function () {
     return newsData.get();
   },
-  error: function() {
+  error: function () {
     return errorData.get();
   }
 });
 
 Template.newsPagination.events({
-  'click button.page-button': function(event) {
+  'click button.page-button': function (event) {
     const page = parseInt(event.target.dataset.page) - 1;
     const tag = currentTag.get();
     currentPage.set(page);
-    Meteor.call('news.fetchGeneral', tag, page, handleFetchResult);
+    if (getCountryFromUrl() === "" || getCountryFromUrl === null) {
+      Meteor.call('news.fetchGeneral', "tr", tag, page, handleFetchResult);
+    }
+    else {
+      Meteor.call('news.fetchGeneral', getCountryFromUrl(), tag, page, handleFetchResult);
+    }
+
     updatePageRange(page);
   },
-  'click button.prev': function() {
+  'click button.prev': function () {
     let page = currentPage.get();
     if (page > 0) {
       page -= 1;
       currentPage.set(page);
       const tag = currentTag.get();
-      Meteor.call('news.fetchGeneral', tag, page, handleFetchResult);
+      if (getCountryFromUrl() === "" || getCountryFromUrl === null) {
+        Meteor.call('news.fetchGeneral', "tr", tag, page, handleFetchResult);
+      }
+      Meteor.call('news.fetchGeneral', getCountryFromUrl(), tag, page, handleFetchResult);
       updatePageRange(page);
     }
   },
-  'click button.next': function() {
+  'click button.next': function () {
     let page = currentPage.get();
     if (page < totalPages.get() - 1) {
       page += 1;
       currentPage.set(page);
       const tag = currentTag.get();
-      Meteor.call('news.fetchGeneral', tag, page, handleFetchResult);
+      if (getCountryFromUrl() === "" || getCountryFromUrl === null) {
+        Meteor.call('news.fetchGeneral', "tr", tag, page, handleFetchResult);
+      }
+      Meteor.call('news.fetchGeneral', getCountryFromUrl(), tag, page, handleFetchResult);
       updatePageRange(page);
     }
   }
 });
 
 Template.newsCard.events({
-  'click .card': function(event) {
+  'click .card': function (event) {
     const url = this.url;
     if (url) {
       window.open(url, '_blank');
@@ -113,10 +140,10 @@ Template.newsCard.events({
 });
 
 Template.newsPagination.helpers({
-  pages: function() {
+  pages: function () {
     return pageRange.get();
   },
-  isActive: function(page) {
+  isActive: function (page) {
     return currentPage.get() === (page - 1) ? 'active' : '';
   }
 });
