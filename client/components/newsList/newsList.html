@@ -1,0 +1,17 @@
+<template name="newsList">
+    {{#if error}}
+    <div class="alert alert-danger" role="alert">
+        {{error}}
+    </div>
+    {{else}}
+    <div class="container mt-4">
+        <div class="row">
+            {{#each news}}
+            <div class="col-md-4 mb-4 col-sm-6 col-xs-12" style="justify-content: center; display: flex;">
+                {{> newsCard}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+</template>

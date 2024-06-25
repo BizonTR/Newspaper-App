@@ -7,10 +7,19 @@ import '@fortawesome/fontawesome-free/js/all.js'
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+
 import './main.html';
-import './components/navbar.html'
-import './components/newsCard.js';
-import './components/navbar.js';
+import './components/navbar/navbar.html'
+import './components/newsCard/newsCard.html'
+import './components/newsList/newsList.html';
+import './components/newsPagination/newsPagination.html';
+import './components/footer/footer.html';
+
+import './components/navbar/navbar.js';
+import './components/newsCard/newsCard.js';
+import './components/newsList/newsList.js';
+import './components/newsPagination/newsPagination.js';
+import './components/footer/footer.js';
 
 
 const newsData = new ReactiveVar([]);
@@ -20,7 +29,9 @@ const currentTag = new ReactiveVar('general'); // default news kategorisi
 const totalPages = new ReactiveVar(20); // maks 20 sayfa var olarak ayarlandı
 const pageRange = new ReactiveVar([]); // baslangıc sayfa araligi
 
-const handleFetchResult = (error, result) => {
+export { newsData, errorData, currentPage, currentTag, totalPages, pageRange };
+
+export const handleFetchResult = (error, result) => {
   if (error) {
     console.error('Error fetching news:', error);
     errorData.set(error.reason || error.message);
@@ -33,7 +44,7 @@ const handleFetchResult = (error, result) => {
   }
 };
 
-const updatePageRange = (currentPage) => {
+export const updatePageRange = (currentPage) => {
   const total = totalPages.get();
   let start = Math.max(1, currentPage - 2 + 1);
   let end = Math.min(total, start + 4);
@@ -44,119 +55,19 @@ const updatePageRange = (currentPage) => {
   pageRange.set(range);
 };
 
-function getCountryFromUrl() {
+export const getCountryFromUrl = () => {
   const pathArray = window.location.pathname.split('/');
-  return pathArray[1]; // İlk parça ülke kodunu içeriyor, örneğin '/de' için 'de' döndürecektir
+  return pathArray[1];
 }
 
 Meteor.startup(() => {
-  const country = getCountryFromUrl(); // URL'den ülke kodunu almak için bir fonksiyon kullanıyoruz, bu fonksiyonu tanımlayacağız
+  const country = getCountryFromUrl();
   console.log(country);
   if (country === "" || country === null) {
-    Meteor.call('news.fetchGeneral', "tr", 'general', 0, handleFetchResult); // Meteor metodunu çağırırken ülke kodunu parametre olarak verdik
+    Meteor.call('news.fetchGeneral', "tr", 'general', 0, handleFetchResult);
     updatePageRange(0);
   } else {
-    Meteor.call('news.fetchGeneral', country, 'general', 0, handleFetchResult); // Meteor metodunu çağırırken ülke kodunu parametre olarak verdik
+    Meteor.call('news.fetchGeneral', country, 'general', 0, handleFetchResult);
     updatePageRange(0);
-  }
-});
-
-Template.navbar.events({
-  'click .nav-link': function (event) {
-    event.preventDefault();
-    const tag = event.target.dataset.tag;
-    currentTag.set(tag);
-    currentPage.set(0);
-    if (getCountryFromUrl() === "" || getCountryFromUrl === null) {
-      Meteor.call('news.fetchGeneral', "tr", tag, handleFetchResult);
-    }
-    else{
-      Meteor.call('news.fetchGeneral', getCountryFromUrl(), tag, handleFetchResult);
-    }
-    
-    updatePageRange(0);
-  },
-  'submit #searchForm': function (event) {
-    event.preventDefault();
-    const city = event.target.city.value.trim();
-    if (city) {
-      Meteor.call('news.fetchByCity', city, handleFetchResult);
-    } else {
-      const tag = currentTag.get();
-      Meteor.call('news.fetchGeneral', tag, 0, handleFetchResult);
-    }
-  }
-});
-
-Template.newsList.helpers({
-  news: function () {
-    return newsData.get();
-  },
-  error: function () {
-    return errorData.get();
-  }
-});
-
-Template.newsPagination.events({
-  'click button.page-button': function (event) {
-    const page = parseInt(event.target.dataset.page) - 1;
-    const tag = currentTag.get();
-    currentPage.set(page);
-    if (getCountryFromUrl() === "" || getCountryFromUrl === null) {
-      Meteor.call('news.fetchGeneral', "tr", tag, page, handleFetchResult);
-    }
-    else {
-      Meteor.call('news.fetchGeneral', getCountryFromUrl(), tag, page, handleFetchResult);
-    }
-
-    updatePageRange(page);
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  },
-  'click button.prev': function () {
-    let page = currentPage.get();
-    if (page > 0) {
-      page -= 1;
-      currentPage.set(page);
-      const tag = currentTag.get();
-      if (getCountryFromUrl() === "" || getCountryFromUrl === null) {
-        Meteor.call('news.fetchGeneral', "tr", tag, page, handleFetchResult);
-      }
-      Meteor.call('news.fetchGeneral', getCountryFromUrl(), tag, page, handleFetchResult);
-      updatePageRange(page);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  },
-  'click button.next': function () {
-    let page = currentPage.get();
-    if (page < totalPages.get() - 1) {
-      page += 1;
-      currentPage.set(page);
-      const tag = currentTag.get();
-      if (getCountryFromUrl() === "" || getCountryFromUrl === null) {
-        Meteor.call('news.fetchGeneral', "tr", tag, page, handleFetchResult);
-      }
-      Meteor.call('news.fetchGeneral', getCountryFromUrl(), tag, page, handleFetchResult);
-      updatePageRange(page);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }
-});
-
-Template.newsCard.events({
-  'click .card': function (event) {
-    const url = this.url;
-    if (url) {
-      window.open(url, '_blank');
-    }
-  }
-});
-
-Template.newsPagination.helpers({
-  pages: function () {
-    return pageRange.get();
-  },
-  isActive: function (page) {
-    return currentPage.get() === (page - 1) ? 'active' : '';
   }
 });

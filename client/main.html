@@ -7,45 +7,10 @@
   <div class="container mt-4">
     {{> newsList}}
   </div>
-  <div class="container-fluid" style="justify-content: center; display: flex; background-color: #2a3884;">
+  <div class="container-fluid" style="justify-content: center; display: flex;">
     <div style="margin-top: 20px;">
       {{> newsPagination}}
     </div>
   </div>
+  {{> footer}}
 </body>
-
-<template name="newsList">
-  {{#if error}}
-  <div class="alert alert-danger" role="alert">
-    {{error}}
-  </div>
-  {{else}}
-  <div class="container mt-4">
-    <div class="row">
-      {{#each news}}
-      <div class="col-md-4 mb-4 col-sm-6 col-xs-12" style="justify-content: center; display: flex;">
-        {{> newsCard}}
-      </div>
-      {{/each}}
-    </div>
-  </div>
-  {{/if}}
-</template>
-
-<template name="newsPagination">
-  <nav aria-label="Page navigation">
-    <ul class="pagination">
-      <li class="page-item">
-        <button class="page-link prev">Önceki</button>
-      </li>
-      {{#each pages}}
-      <li class="page-item {{isActive this}}">
-        <button class="page-link page-button" data-page="{{this}}">{{this}}</button>
-      </li>
-      {{/each}}
-      <li class="page-item">
-        <button class="page-link next">Sonraki</button>
-      </li>
-    </ul>
-  </nav>
-</template>
