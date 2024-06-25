@@ -8,33 +8,37 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#" data-tag="general">Genel Haberler</a>
+          <a class="nav-link" href="#" data-tag="general"> <i class="fas fa-globe"></i> Genel Haberler </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" data-tag="technology">Teknoloji</a>
+          <a class="nav-link" href="#" data-tag="technology"> <i class="fas fa-microchip"></i> Teknoloji</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" data-tag="economy">Ekonomi</a>
+          <a class="nav-link" href="#" data-tag="economy"> <i class="fas fa-chart-line"></i> Ekonomi</a>
         </li>
       </ul>
 
-      <div style="margin-inline-end: 75px;">
-        <div class="dropdown">
-          <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Countries
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="tr" country-tag="tr">TR</a>
-            <a class="dropdown-item" href="en" country-tag="en">EN</a>
-            <a class="dropdown-item" href="de" country-tag="de">DE</a>
+      <div class="d-flex justify-content-center">
+        <div style="margin-inline-end: 75px;">
+          <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <span class="mr-2">Ülkeler</span>
+              <i class="fa-solid fa-language" style="height: 25px;"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="tr" country-tag="tr">TR</a>
+              <a class="dropdown-item" href="en" country-tag="en">EN</a>
+              <a class="dropdown-item" href="de" country-tag="de">DE</a>
+            </div>
           </div>
         </div>
       </div>
+      
 
       <form class="form-inline my-2 my-lg-0" id="searchForm">
         <input class="form-control mr-sm-2" type="search" name="city" placeholder="Şehir Giriniz">
-        <button class="btn btn-light my-2 my-sm-0" type="submit">Ara</button>
+        <button class="btn btn-light my-2 my-sm-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
   </nav>

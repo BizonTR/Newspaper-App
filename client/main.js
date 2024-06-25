@@ -1,6 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import '@fortawesome/fontawesome-free'
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/js/all.js'
 import './main.html';
 import './components/navbar.html'
 import './components/newsCard.js'; // import the new newsCard component
@@ -62,9 +65,12 @@ Template.navbar.events({
     currentTag.set(tag);
     currentPage.set(0);
     if (getCountryFromUrl() === "" || getCountryFromUrl === null) {
-      Meteor.call('news.fetchGeneral', "tr", tag, page, handleFetchResult);
+      Meteor.call('news.fetchGeneral', "tr", tag, handleFetchResult);
     }
-    Meteor.call('news.fetchGeneral', getCountryFromUrl(), tag, handleFetchResult);
+    else{
+      Meteor.call('news.fetchGeneral', getCountryFromUrl(), tag, handleFetchResult);
+    }
+    
     updatePageRange(0);
   },
   'submit #searchForm': function (event) {
