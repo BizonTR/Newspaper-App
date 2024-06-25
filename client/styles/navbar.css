@@ -2,6 +2,7 @@
     background-color: #2a3884;
     position: relative;
     z-index: 1000;
+    height: 80px;
   }
   
   .navbar-custom .navbar-brand,
@@ -20,4 +21,16 @@
   .nav-link{
     margin-inline: 10px;
   }
+
+  @media (max-width: 1024px) {
+    .navbar-custom .navbar-collapse {
+      background-color: #2a3884; /* Navbar arka plan rengi */
+      position: absolute;
+      top: 80px; /* .navbar-custom için belirlediğiniz yükseklik */
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+  }
+  
   

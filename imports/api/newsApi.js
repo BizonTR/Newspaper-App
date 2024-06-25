@@ -1,47 +1,34 @@
-import https from 'https';
+import { fetch } from 'meteor/fetch';
 
 const apiKey = 'apikey 26ZJStpeHtZ9e6Tm97Ccst:0hCWO3AEd2DJPBIrmBlxfx';
 
 const fetchNews = (path) => {
   return new Promise((resolve, reject) => {
-    const options = {
+    const url = `https://api.collectapi.com${path}`;
+
+    fetch(url, {
       method: 'GET',
-      hostname: 'api.collectapi.com',
-      port: null,
-      path: path,
       headers: {
         'content-type': 'application/json',
         'authorization': apiKey
       }
-    };
-
-    const req = https.request(options, (res) => {
-      let chunks = [];
-
-      res.on('data', (chunk) => {
-        chunks.push(chunk);
-      });
-
-      res.on('end', () => {
-        const body = Buffer.concat(chunks).toString();
-        try {
-          const parsedBody = JSON.parse(body);
-          if (parsedBody.success) {
-            resolve(parsedBody);
-          } else {
-            reject(new Error(parsedBody.message));
-          }
-        } catch (e) {
-          reject(new Error('Failed to parse response body'));
-        }
-      });
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error ${res.status} - ${res.statusText}`);
+      }
+      return res.json();
+    })
+    .then(parsedBody => {
+      if (parsedBody.success) {
+        resolve(parsedBody);
+      } else {
+        reject(new Error(parsedBody.message));
+      }
+    })
+    .catch(err => {
+      reject(new Error(`Failed to fetch data: ${err.message}`));
     });
-
-    req.on('error', (e) => {
-      reject(e);
-    });
-
-    req.end();
   });
 };
 

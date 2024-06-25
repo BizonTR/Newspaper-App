@@ -4,10 +4,13 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import '@fortawesome/fontawesome-free'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
+import "/node_modules/flag-icons/css/flag-icons.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import './main.html';
 import './components/navbar.html'
-import './components/newsCard.js'; // import the new newsCard component
-import './components/navbar.js'; // import the new navbar component
+import './components/newsCard.js';
+import './components/navbar.js';
 
 
 const newsData = new ReactiveVar([]);
@@ -107,6 +110,8 @@ Template.newsPagination.events({
     }
 
     updatePageRange(page);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   },
   'click button.prev': function () {
     let page = currentPage.get();
@@ -119,6 +124,7 @@ Template.newsPagination.events({
       }
       Meteor.call('news.fetchGeneral', getCountryFromUrl(), tag, page, handleFetchResult);
       updatePageRange(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   },
   'click button.next': function () {
@@ -132,6 +138,7 @@ Template.newsPagination.events({
       }
       Meteor.call('news.fetchGeneral', getCountryFromUrl(), tag, page, handleFetchResult);
       updatePageRange(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 });
