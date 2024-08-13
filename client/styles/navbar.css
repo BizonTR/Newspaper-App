@@ -1,36 +1,59 @@
+/* Navbar'ın genel görünümü */
 .navbar-custom {
-    background-color: #2a3884;
-    position: relative;
-    z-index: 1000;
-    height: 80px;
-  }
-  
-  .navbar-custom .navbar-brand,
-  .navbar-custom .nav-link {
-    color: #ffffff; /* Beyaz renk */
-  }
-  
-  .navbar-custom .nav-link:hover {
-    color: #d3d3d3; /* Açık gri renk */
-  }
+  background-color: #343a40; /* Navbar arka plan rengi, Bootstrap'ın koyu rengi */
+  position: relative;
+  z-index: 1000; /* Navbar'ın diğer elemanların üstünde olması için */
+  height: 80px; /* Navbar yüksekliği */
+}
 
-  .navbar-toggler {
-    z-index: 1100;
-  }
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+  color: #ffffff; /* Navbar'daki yazı rengi beyaz */
+}
 
-  .nav-link{
-    margin-inline: 10px;
-  }
+.navbar-custom .nav-link:hover {
+  color: #d3d3d3; /* Hover durumunda yazı rengi açık gri */
+}
 
-  @media (max-width: 1024px) {
-    .navbar-custom .navbar-collapse {
-      background-color: #2a3884; /* Navbar arka plan rengi */
-      position: absolute;
-      top: 80px; /* .navbar-custom için belirlediğiniz yükseklik */
-      left: 0;
-      right: 0;
-      z-index: 1000;
-    }
+/* Navbar toggle butonunun z-index değeri */
+.navbar-toggler {
+  z-index: 1100; /* Navbar collapse menüsünün üstünde olması için */
+}
+
+/* Navbar linklerinin arasına boşluk ekler */
+.nav-link {
+  margin-inline: 10px;
+}
+
+/* Navbar collapse arka plan rengi */
+.navbar-collapse {
+  background-color: #343a40; /* Collapse panel arka plan rengi navbar ile aynı olmalı */
+}
+
+/* Dropdown menüsü için arka plan rengi */
+.navbar .dropdown-menu {
+  background-color: #343a40; /* Dropdown menüsünün arka plan rengini navbar ile aynı yapar */
+  border: none; /* Border'ı kaldırır */
+}
+
+/* Dropdown menüsü öğeleri için renk */
+.navbar .dropdown-item {
+  color: #ffffff; /* Menü öğeleri rengi beyaz */
+}
+
+/* Dropdown menüsü öğelerine hover efekti */
+.navbar .dropdown-item:hover {
+  background-color: #495057; /* Hover arka plan rengi */
+  color: #ffffff; /* Hover rengi beyaz */
+}
+
+/* Responsive ayarlar */
+@media (max-width: 1024px) {
+  .navbar-custom .navbar-collapse {
+    position: absolute;
+    top: 80px; /* Navbar'ın altından başlayacak şekilde konumlandırır */
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Navbar'ın üstünde görünmesi için */
   }
-  
-  
+}
