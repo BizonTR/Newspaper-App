@@ -1,6 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { fetchGeneralNews, fetchNewsByCity } from '/imports/api/newsApi.js';
 
+// const apiKey = Meteor.settings.private.NEWS_API_KEY;
+// console.log('API Key:', apiKey);
+
 Meteor.methods({
   'news.fetchGeneral': async function(country, tag, page = 0) {
     try {
@@ -22,5 +25,6 @@ Meteor.methods({
 });
 
 Meteor.startup(() => {
+  // console.log('API Key Server:', process.env.NEWS_API_KEY);
   // Server-side startup code if needed
 });

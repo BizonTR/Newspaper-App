@@ -21,20 +21,20 @@
       <div>
         <div style="margin-inline-end: 75px;">
           <div class="dropdown">
-            <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button"
+              id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="mr-2">Ülkeler</span>
               <i class="fa-solid fa-language" style="height: 25px;"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="tr" country-tag="tr">TR</a>
-              <a class="dropdown-item" href="en" country-tag="en">EN</a>
-              <a class="dropdown-item" href="de" country-tag="de">DE</a>
+              <a class="dropdown-item" href="#" data-country="tr">Türkiye</a>
+              <a class="dropdown-item" href="#" data-country="en">İngiltere</a>
+              <a class="dropdown-item" href="#" data-country="de">Almanya</a>
             </div>
           </div>
+          <span id="selectedCountry" class="ml-3 text-light">Seçili Ülke: Türkiye</span>
         </div>
       </div>
-      
 
       <form class="form-inline my-2 my-lg-0" id="searchForm">
         <input class="form-control mr-sm-2" type="search" name="city" placeholder="Şehir Giriniz">

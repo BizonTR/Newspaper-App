@@ -1,6 +1,8 @@
 import { fetch } from 'meteor/fetch';
 
-const apiKey = 'apikey 26ZJStpeHtZ9e6Tm97Ccst:0hCWO3AEd2DJPBIrmBlxfx';
+const apiKey = Meteor.settings.private.NEWS_API_KEY;
+
+//console.log('API Key:', apiKey);
 
 const fetchNews = (path) => {
   return new Promise((resolve, reject) => {
@@ -37,8 +39,8 @@ export const fetchGeneralNews = (country= 'tr', tag = 'general', page = 0) => {
   return fetchNews(path);
 };
 
-export const fetchNewsByCity = (city) => {
-  const path = `/news/getNewsLocal?city=${encodeURIComponent(city)}`;
-  console.log(`Fetching news for city: ${city} with path: ${path}`);
+export const fetchNewsByCity = (city, country = "tr") => {
+  const path = `/news/getNewsLocal?country=${encodeURIComponent(country)}&city=${encodeURIComponent(city)}`;
+  console.log(`Fetching news for city: ${city} and country: ${country} with path: ${path}`);
   return fetchNews(path);
 };
