@@ -1,23 +1,31 @@
 import { Template } from 'meteor/templating';
 import { currentTag, currentPage, updatePageRange, handleFetchResult, getCountryFromUrl } from '../../main.js';
+import { ReactiveVar } from 'meteor/reactive-var';
+
+const selectedCountry = new ReactiveVar('Türkiye');
 
 Template.navbar.onCreated(function () {
   this.autorun(() => {
+    // URL'den ülke kodunu al ve güncelle
     const country = getCountryFromUrl() || "tr";
-    const countryNames = {
-      "tr": "Türkiye",
-      "en": "İngiltere",
-      "de": "Almanya"
-    };
-    const countryText = countryNames[country] || 'Türkiye';
-    
-    Tracker.afterFlush(() => {
-      const selectedCountryElement = document.getElementById('selectedCountry');
-      if (selectedCountryElement) {
-        selectedCountryElement.innerText = `Seçili Ülke: ${countryText}`;
-      }
-    });
+    let countryText;
+    if (country === "tr") {
+      countryText = 'Türkiye';
+    } else if (country === "en") {
+      countryText = 'İngiltere';
+    } else if (country === "de") {
+      countryText = 'Almanya';
+    } else {
+      countryText = country.toUpperCase();
+    }
+    selectedCountry.set(countryText);
   });
+});
+
+Template.navbar.helpers({
+  selectedCountry() {
+    return selectedCountry.get();
+  }
 });
 
 Template.navbar.events({
@@ -43,24 +51,21 @@ Template.navbar.events({
   'click .dropdown-item': function (event) {
     event.preventDefault();
     const country = event.target.dataset.country;
-    const countryNames = {
-      "tr": "Türkiye",
-      "en": "İngiltere",
-      "de": "Almanya"
-    };
     if (country) {
+      let countryText;
+      if (country === "tr") {
+        countryText = 'Türkiye';
+      } else if (country === "en") {
+        countryText = 'İngiltere';
+      } else if (country === "de") {
+        countryText = 'Almanya';
+      }
+      selectedCountry.set(countryText);
+
       // URL'yi güncelle
       window.history.pushState({}, '', `/${country}`);
       // Haberleri yeniden çek
       Meteor.call('news.fetchGeneral', country, currentTag.get(), 0, handleFetchResult);
-      
-      // Seçilen ülkeyi güncelle
-      Tracker.afterFlush(() => {
-        const selectedCountryElement = document.getElementById('selectedCountry');
-        if (selectedCountryElement) {
-          selectedCountryElement.innerText = `Seçili Ülke: ${countryNames[country] || 'Türkiye'}`;
-        }
-      });
     }
   }
 });

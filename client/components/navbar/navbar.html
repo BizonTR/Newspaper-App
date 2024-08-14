@@ -23,7 +23,11 @@
           <div class="dropdown">
             <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button"
               id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2">Ülkeler</span>
+              {{#if selectedCountry}}
+                <span class="mr-2">{{selectedCountry}}</span>
+              {{else}}
+                <span class="mr-2">Türkiye</span>
+              {{/if}}
               <i class="fa-solid fa-language" style="height: 25px;"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -32,7 +36,6 @@
               <a class="dropdown-item" href="#" data-country="de">Almanya</a>
             </div>
           </div>
-          <span id="selectedCountry" class="ml-3 text-light">Seçili Ülke: Türkiye</span>
         </div>
       </div>
 

@@ -1,7 +1,6 @@
-// newsPage.js
 
 import { Template } from 'meteor/templating';
-import { selectedNews } from '../components/newsCard/newsCard.js'; // ReactiveVar'ı import et
+import { selectedNews } from '../components/newsCard/newsCard.js';
 
 Template.newsPageLayout.helpers({
   selectedNews() {

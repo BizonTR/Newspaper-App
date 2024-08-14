@@ -1,16 +1,12 @@
 <template name="newsCard">
     <div class="card">
         <div class="image">
-            <img class="card-img-top" src="{{image}}" alt="Image">
+            <img class="card-img-top" src="{{imageWithFallback}}" alt="Image">
         </div>
         <div class="content">
-                <span class="title">
-                    {{name}}
-                </span>
-
-            <!-- <p class="desc">
-                {{description}}
-            </p> -->
+            <span class="title">
+                {{name}}
+            </span>
         </div>
     </div>
 </template>
