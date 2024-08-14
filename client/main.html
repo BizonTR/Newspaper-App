@@ -3,14 +3,21 @@
 </head>
 
 <body>
-  {{> navbar}}
-  <div class="container mt-4">
-    {{> newsList}}
-  </div>
-  <div class="container-fluid" style="justify-content: center; display: flex;">
-    <div style="margin-top: 20px;">
-      {{> newsPagination}}
-    </div>
-  </div>
-  {{> footer}}
 </body>
+
+<template name="mainLayout">
+  {{> navbar}}
+  {{> Template.dynamic template=main}}
+  {{> footer}}
+</template>
+
+<template name="newsPageLayout">
+  <div class="container mt-4">
+    {{#if selectedNews}}
+      <h1>Name: {{selectedNews.name}}</h1>
+    {{else}}
+      <h1>No news selected</h1>
+    {{/if}}
+  </div>
+</template>
+

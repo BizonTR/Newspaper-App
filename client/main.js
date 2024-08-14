@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
 import './main.html';
+import './components/newsListLayout.html';
 import './components/navbar/navbar.html'
 import './components/newsCard/newsCard.html'
 import './components/newsList/newsList.html';
@@ -20,6 +21,8 @@ import './components/newsCard/newsCard.js';
 import './components/newsList/newsList.js';
 import './components/newsPagination/newsPagination.js';
 import './components/footer/footer.js';
+import './route.js';
+import './components/newsPageLayout.js';
 
 
 const newsData = new ReactiveVar([]);

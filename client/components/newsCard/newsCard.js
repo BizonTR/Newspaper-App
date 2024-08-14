@@ -1,11 +1,15 @@
+// newsCard.js
+
 import { Template } from 'meteor/templating';
-import './newsCard.html';
+import { ReactiveVar } from 'meteor/reactive-var';
+
+export const selectedNews = new ReactiveVar(null);
 
 Template.newsCard.events({
-    'click .card': function (event) {
-      const url = this.url;
-      if (url) {
-        window.open(url, '_blank');
-      }
-    }
-  });
+  'click .card': function (event) {
+    selectedNews.set(this);
+    console.log('Selected News:', selectedNews.get()); // Konsola yazdır
+    FlowRouter.go('/newsPage');
+  }
+});
+

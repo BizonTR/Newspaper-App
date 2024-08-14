@@ -12,8 +12,12 @@ body {
   flex-direction: column;
 }
 
-/* Ana içeriği ve footer'ı yukarı ve aşağıya hizalamak için */
-.container {
-  flex: 1;
+.navbar, .footer {
+  flex-shrink: 0;
 }
 
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
