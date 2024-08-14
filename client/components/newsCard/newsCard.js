@@ -8,7 +8,7 @@ export const selectedNews = new ReactiveVar(null);
 Template.newsCard.events({
   'click .card': function (event) {
     selectedNews.set(this);
-    console.log('Selected News:', selectedNews.get()); // Konsola yazdır
+    console.log('Selected News:', selectedNews.get());
     FlowRouter.go('/newsPage');
   }
 });

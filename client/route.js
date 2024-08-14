@@ -6,10 +6,14 @@ import './main.html';
 import './components/newsListLayout.html';
 
 // Ana sayfa için rota
-FlowRouter.route('/', {
-  action: function () {
-    BlazeLayout.render('mainLayout', { main: 'newsListLayout' });
-  }
+const newsListRoutes = ['/', '/tr', '/en', '/de'];
+
+newsListRoutes.forEach(route => {
+  FlowRouter.route(route, {
+    action: function() {
+      BlazeLayout.render('mainLayout', { main: 'newsListLayout' });
+    }
+  });
 });
 
 // NewsPage için rota
