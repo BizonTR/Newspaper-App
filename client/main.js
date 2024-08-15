@@ -31,8 +31,9 @@ const currentPage = new ReactiveVar(0); // default sayfa numarası
 const currentTag = new ReactiveVar('general'); // default news kategorisi
 const totalPages = new ReactiveVar(20); // maks 20 sayfa var olarak ayarlandı
 const pageRange = new ReactiveVar([]); // baslangıc sayfa araligi
+const loading = new ReactiveVar(true);
 
-export { newsData, errorData, currentPage, currentTag, totalPages, pageRange };
+export { newsData, errorData, loading, currentPage, currentTag, totalPages, pageRange };
 
 export const handleFetchResult = (error, result) => {
   if (error) {
@@ -45,6 +46,8 @@ export const handleFetchResult = (error, result) => {
     console.error('Unexpected API response format:', result);
     newsData.set([]);
   }
+
+  loading.set(false);
 };
 
 export const updatePageRange = (currentPage) => {

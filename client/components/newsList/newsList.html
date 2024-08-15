@@ -1,4 +1,9 @@
 <template name="newsList">
+    {{#if loading}}
+    <div class="text-center">
+        <h4>LOADING...</h4>
+    </div>
+    {{else}}
     {{#if error}}
     <div class="alert alert-danger" role="alert">
         {{error}}
@@ -13,5 +18,6 @@
             {{/each}}
         </div>
     </div>
+    {{/if}}
     {{/if}}
 </template>

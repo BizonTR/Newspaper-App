@@ -67,9 +67,14 @@ Template.navbar.events({
 
       // URL'yi güncelle
       window.history.pushState({}, '', `/${country}`);
-      // Haberleri yeniden çek
+      
+      // Ana sayfaya yönlendir ve haberleri fetch et
       const tag = localStorage.getItem('selectedTag') || 'general';
       Meteor.call('news.fetchGeneral', country, tag, 0, handleFetchResult);
+      updatePageRange(0);
+      
+      // Ana sayfaya yönlendir
+      window.location.href = `/${country}`;
     }
   }
 });

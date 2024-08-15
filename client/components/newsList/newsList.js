@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { newsData, errorData } from '../../main.js';
+import { newsData, errorData, loading } from '../../main.js';
 
 Template.newsList.helpers({
   news: function () {
@@ -7,5 +7,8 @@ Template.newsList.helpers({
   },
   error: function () {
     return errorData.get();
+  },
+  loading: function () {
+    return loading.get();
   }
 });
