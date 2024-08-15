@@ -1,14 +1,15 @@
-// newsCard.js
-
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Session } from 'meteor/session';
 
-export const selectedNews = new ReactiveVar(null);
+const selectedNews = new ReactiveVar(JSON.parse(localStorage.getItem('selectedNews')));
 
 Template.newsCard.events({
   'click .card': function (event) {
-    selectedNews.set(this);
-    console.log('Selected News:', selectedNews.get());
+    const newsData = this;
+    Session.set('selectedNews', newsData);
+    localStorage.setItem('selectedNews', JSON.stringify(newsData));
+    console.log('Selected News:', Session.get('selectedNews'));
     FlowRouter.go('/newsPage');
   }
 });

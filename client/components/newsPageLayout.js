@@ -1,9 +1,15 @@
-
 import { Template } from 'meteor/templating';
-import { selectedNews } from '../components/newsCard/newsCard.js';
+import { Session } from 'meteor/session';
+
+Template.newsPageLayout.onCreated(function () {
+  const savedNews = localStorage.getItem('selectedNews');
+  if (savedNews) {
+    Session.set('selectedNews', JSON.parse(savedNews));
+  }
+});
 
 Template.newsPageLayout.helpers({
   selectedNews() {
-    return selectedNews.get();
+    return Session.get('selectedNews');
   }
 });

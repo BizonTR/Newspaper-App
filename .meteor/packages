@@ -27,3 +27,4 @@ blaze-hot               # Update files using Blaze's API with HMR
 fetch
 kadira:flow-router
 kadira:blaze-layout
+session
