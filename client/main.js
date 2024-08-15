@@ -61,7 +61,7 @@ export const updatePageRange = (currentPage) => {
   pageRange.set(range);
 };
 
-export const getCountryFromUrl = () => {
+export const getCountry = () => {
   // const pathArray = window.location.pathname.split('/');
   // return pathArray[1];
   const countryFromLocalStorage = localStorage.getItem('selectedCountry');
@@ -69,7 +69,7 @@ export const getCountryFromUrl = () => {
 }
 
 Meteor.startup(() => {
-  const country = getCountryFromUrl();
+  const country = getCountry();
   const tag = localStorage.getItem('selectedTag') || 'general';
   console.log(country);
   if (country === "" || country === null) {

@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { currentTag, currentPage, updatePageRange, handleFetchResult, getCountryFromUrl } from '../../main.js';
+import { currentTag, currentPage, updatePageRange, handleFetchResult, getCountry } from '../../main.js';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 const selectedCountry = new ReactiveVar('Türkiye');
@@ -7,7 +7,7 @@ const selectedCountry = new ReactiveVar('Türkiye');
 Template.navbar.onCreated(function () {
   this.autorun(() => {
     // URL'den ülke kodunu al ve güncelle
-    const country = getCountryFromUrl() || "tr";
+    const country = getCountry() || "tr";
     let countryText;
     if (country === "tr") {
       countryText = 'Türkiye';
@@ -35,7 +35,7 @@ Template.navbar.events({
     currentTag.set(tag);
     currentPage.set(0);
     localStorage.setItem('selectedTag', tag);
-    const country = getCountryFromUrl() || "tr";
+    const country = getCountry() || "tr";
     Meteor.call('news.fetchGeneral', country, tag, handleFetchResult);
     updatePageRange(0);
     window.location.href = `/`;
@@ -43,11 +43,12 @@ Template.navbar.events({
   'submit #searchForm': function (event) {
     event.preventDefault();
     const city = event.target.city.value.trim();
+    const country = localStorage.getItem('selectedCountry') || 'tr';
     if (city) {
-      Meteor.call('news.fetchByCity', city, handleFetchResult);
+      Meteor.call('news.fetchByCity', city, country, handleFetchResult);
     } else {
       const tag = currentTag.get();
-      Meteor.call('news.fetchGeneral', getCountryFromUrl() || "tr", tag, 0, handleFetchResult);
+      Meteor.call('news.fetchGeneral', getCountry() || "tr", tag, 0, handleFetchResult);
     }
   },
   'click .dropdown-item': function (event) {

@@ -36,21 +36,6 @@ const fetchNews = (path) => {
   });
 };
 
-// Helper function to get selected country from localStorage
-const getSelectedCountry = () => {
-  const country = localStorage.getItem('selectedCountry') || 'Türkiye';
-  switch (country) {
-    case 'Türkiye':
-      return 'tr';
-    case 'İngiltere':
-      return 'en';
-    case 'Almanya':
-      return 'de';
-    default:
-      return 'tr'; // default to Turkey if no match
-  }
-};
-
 export const fetchGeneralNews = (country = 'tr', tag = 'general', page = 0) => {
   const path = `/news/getNews?country=${encodeURIComponent(country)}&tag=${encodeURIComponent(tag)}&paging=${page}`;
   console.log(`Fetching general news with path: ${path}`); // Path'i konsola yazdır
