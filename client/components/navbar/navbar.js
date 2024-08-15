@@ -34,9 +34,11 @@ Template.navbar.events({
     const tag = event.target.dataset.tag;
     currentTag.set(tag);
     currentPage.set(0);
+    localStorage.setItem('selectedTag', tag);
     const country = getCountryFromUrl() || "tr";
     Meteor.call('news.fetchGeneral', country, tag, handleFetchResult);
     updatePageRange(0);
+    window.location.href = `/`;
   },
   'submit #searchForm': function (event) {
     event.preventDefault();
@@ -61,11 +63,13 @@ Template.navbar.events({
         countryText = 'Almanya';
       }
       selectedCountry.set(countryText);
+      localStorage.setItem('selectedCountry', country);
 
       // URL'yi güncelle
       window.history.pushState({}, '', `/${country}`);
       // Haberleri yeniden çek
-      Meteor.call('news.fetchGeneral', country, currentTag.get(), 0, handleFetchResult);
+      const tag = localStorage.getItem('selectedTag') || 'general';
+      Meteor.call('news.fetchGeneral', country, tag, 0, handleFetchResult);
     }
   }
 });

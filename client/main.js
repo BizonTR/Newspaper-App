@@ -59,18 +59,21 @@ export const updatePageRange = (currentPage) => {
 };
 
 export const getCountryFromUrl = () => {
-  const pathArray = window.location.pathname.split('/');
-  return pathArray[1];
+  // const pathArray = window.location.pathname.split('/');
+  // return pathArray[1];
+  const countryFromLocalStorage = localStorage.getItem('selectedCountry');
+  return countryFromLocalStorage ? countryFromLocalStorage : 'tr';
 }
 
 Meteor.startup(() => {
   const country = getCountryFromUrl();
+  const tag = localStorage.getItem('selectedTag') || 'general';
   console.log(country);
   if (country === "" || country === null) {
-    Meteor.call('news.fetchGeneral', "tr", 'general', 0, handleFetchResult);
+    Meteor.call('news.fetchGeneral', "tr", tag, 0, handleFetchResult);
     updatePageRange(0);
   } else {
-    Meteor.call('news.fetchGeneral', country, 'general', 0, handleFetchResult);
+    Meteor.call('news.fetchGeneral', country, tag, 0, handleFetchResult);
     updatePageRange(0);
   }
 });
