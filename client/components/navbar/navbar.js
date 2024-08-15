@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { currentTag, currentPage, updatePageRange, handleFetchResult, getCountry } from '../../main.js';
+import { currentTag, currentPage, updatePageRange, handleFetchResult, getCountry, loading } from '../../main.js';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 const selectedCountry = new ReactiveVar('Türkiye');
@@ -44,6 +44,7 @@ Template.navbar.events({
     event.preventDefault();
     const city = event.target.city.value.trim();
     const country = localStorage.getItem('selectedCountry') || 'tr';
+    loading.set(true);
     if (city) {
       Meteor.call('news.fetchByCity', city, country, handleFetchResult);
     } else {
