@@ -1,23 +1,23 @@
 <template name="newsList">
-    {{#if loading}}
+  {{#if loading}}
     <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-        <div class="loader"></div>
+      <div class="loader"></div>
     </div>
-    {{else}}
+  {{else}}
     {{#if error}}
-    <div class="alert alert-danger" role="alert">
+      <div class="alert alert-danger" role="alert">
         {{error}}
-    </div>
+      </div>
     {{else}}
-    <div class="container mt-4">
+      <div class="container mt-4">
         <div class="row">
-            {{#each news}}
+          {{#each news}}
             <div class="col-md-4 mb-4 col-sm-6 col-xs-12" style="justify-content: center; display: flex;">
-                {{> newsCard}}
+              {{> newsCard}}
             </div>
-            {{/each}}
+          {{/each}}
         </div>
-    </div>
+      </div>
     {{/if}}
-    {{/if}}
+  {{/if}}
 </template>

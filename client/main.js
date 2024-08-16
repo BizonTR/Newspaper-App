@@ -21,7 +21,7 @@ import './components/newsCard/newsCard.js';
 import './components/newsList/newsList.js';
 import './components/newsPagination/newsPagination.js';
 import './components/footer/footer.js';
-import './route.js';
+import './routes.js';
 import './components/newsPageLayout.js';
 
 

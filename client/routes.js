@@ -23,3 +23,29 @@ FlowRouter.route('/newsPage', {
     BlazeLayout.render('mainLayout', { main: 'newsPageLayout' });
   }
 });
+
+
+// FlowRouter.route('/', {
+//   action: function() {
+//     BlazeLayout.render('mainLayout', { main: 'newsListLayout' });
+//   }
+// });
+
+// FlowRouter.route('/news', {
+//   action: function() {
+//     BlazeLayout.render('mainLayout', { main: 'newsListLayout' });
+//   }
+// });
+
+// FlowRouter.route('/news/:id', {
+//   name: 'newsPage',
+//   action() {
+//     BlazeLayout.render('mainLayout', { main: 'newsPageDaLayout' });
+//   }
+// });
+
+// FlowRouter.getQueryParam('country') || 'tr'
+
+// FlowRouter.setQueryParam({'country': 'en'}) 
+
+// FlowRouter.getParam('country') || 'tr'
