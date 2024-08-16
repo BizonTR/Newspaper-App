@@ -1,5 +1,5 @@
 /* Sayfanın tüm yüksekliğini kaplamak için */
-html, body {
+html, body, #__blaze-root {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -7,6 +7,11 @@ html, body {
 }
 
 /* Body'yi tam ekran yapmak için */
+#__blaze-root {
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   display: flex;
   flex-direction: column;
