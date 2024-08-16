@@ -15,6 +15,7 @@ import './components/newsCard/newsCard.html'
 import './components/newsList/newsList.html';
 import './components/newsPagination/newsPagination.html';
 import './components/footer/footer.html';
+import './components/newsPageLayout/newsPageLayout.html'
 
 import './components/navbar/navbar.js';
 import './components/newsCard/newsCard.js';
@@ -22,7 +23,7 @@ import './components/newsList/newsList.js';
 import './components/newsPagination/newsPagination.js';
 import './components/footer/footer.js';
 import './routes.js';
-import './components/newsPageLayout.js';
+import './components/newsPageLayout/newsPageLayout.js';
 
 
 const newsData = new ReactiveVar([]);

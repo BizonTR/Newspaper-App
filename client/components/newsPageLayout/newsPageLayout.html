@@ -1,0 +1,14 @@
+<template name="newsPageLayout">
+    <div class="container mt-4">
+        {{#if selectedNews}}
+        <h1>{{selectedNews.name}}</h1>
+        <img src="{{imageWithFallback}}" alt="{{selectedNews.name}}" class="img-fluid my-3">
+        <p>{{selectedNews.description}}</p>
+        <div style="padding-block: 50px; display: flex; justify-content: center;">
+            <a href="{{selectedNews.url}}" target="_blank" class="btn btn-primary">Haber Detayları</a>
+        </div>
+        {{else}}
+        <h1>No news selected</h1>
+        {{/if}}
+    </div>
+</template>
