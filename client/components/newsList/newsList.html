@@ -1,7 +1,7 @@
 <template name="newsList">
     {{#if loading}}
-    <div class="text-center">
-        <h4>LOADING...</h4>
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="loader"></div>
     </div>
     {{else}}
     {{#if error}}
